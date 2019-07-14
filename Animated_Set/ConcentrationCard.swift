@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct ConcentrationCard
+struct ConcentrationCard: Hashable
 {
     var isFaceUp = false
     var isMatched = false
     var hasBeenFlipped = false
-    var identifier: Int
+    private var identifier: Int
     
     private static var identifierFactory = 0
     
