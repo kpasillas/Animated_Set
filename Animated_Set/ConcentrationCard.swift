@@ -8,8 +8,15 @@
 
 import Foundation
 
+//Lecture #4, 33:41
 struct ConcentrationCard: Hashable
 {
+    var hashValue: Int { return identifier }
+    
+    static func ==(lhs: ConcentrationCard, rhs: ConcentrationCard) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+    
     var isFaceUp = false
     var isMatched = false
     var hasBeenFlipped = false
