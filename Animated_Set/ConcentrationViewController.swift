@@ -66,7 +66,7 @@ class ConcentrationViewController: UIViewController {
     private func updateFlipCountLabel() {
         let attributes: [NSAttributedString.Key:Any] = [
             .strokeWidth : 5.0,
-            .strokeColor : #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         ]
         let attributedString = NSAttributedString(string: "Flips: \(game.flipCount)", attributes: attributes)
         flipCountLabel.attributedText = attributedString
@@ -75,7 +75,7 @@ class ConcentrationViewController: UIViewController {
     private func updateScoreLabel() {
         let attributes: [NSAttributedString.Key:Any] = [
             .strokeWidth : 5.0,
-            .strokeColor : #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         ]
         let attributedString = NSAttributedString(string: "Score: \(game.score)", attributes: attributes)
         scoreLabel.attributedText = attributedString
