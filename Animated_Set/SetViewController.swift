@@ -83,41 +83,18 @@ class SetViewController: UIViewController {
 //        }
 //    }
 
-    @IBAction func dealCardsButton(_ sender: CustomSetButtom) {
-        dealCards()
+    
+    @IBAction func dealCards(_ sender: CustomSetButtom) {
+        game.dealThreeCards()
+        updateViewFromModel()
     }
     
     
     @IBAction func startNewGame(_ sender: CustomSetButtom) {
-//        print("In startNewGame")
         game = Set()
         updateViewFromModel()
     }
     
-//    @IBAction private func startNewGame(_ sender: UIButton) {
-//        game = Set()
-////        resetDeckOfCards()
-//        updateViewFromModel()
-//    }
- 
-//    @IBAction func dealCardsButton(_ sender: UIButton) {
-//        dealCards()
-//    }
-    
-    @IBAction func dealCardsSwipe(_ sender: UISwipeGestureRecognizer) {
-        dealCards()
-    }
-    
-    @IBAction func shuffleCardsRotate(_ sender: UIRotationGestureRecognizer) {
-        game.shuffleDealtCards()
-        updateViewFromModel()
-    }
-    
-    private func dealCards() {
-        game.dealThreeCards()
-        updateViewFromModel()
-    }
-
     private func updateViewFromModel() {
 //        for index in setCardButtons.indices {                                           // update all cards
 //            let button = setCardButtons[index]
