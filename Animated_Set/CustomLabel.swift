@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomSetLabel: UILabel {
+class CustomLabel: UILabel {
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -84,7 +84,7 @@ class CustomSetLabel: UILabel {
     
 }
 
-extension CustomSetLabel {
+extension CustomLabel {
     private struct SizeRatio {
         static let cornerRadiusToBoundsHeightRatio: CGFloat = 0.06
         static let borderWidthToBoundsHeightRatio: CGFloat = 0.06

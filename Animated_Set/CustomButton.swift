@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomSetButtom: UIButton {
+class CustomButtom: UIButton {
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -66,7 +66,7 @@ class CustomSetButtom: UIButton {
     
 }
 
-extension CustomSetButtom {
+extension CustomButtom {
     private struct SizeRatio {
         static let cornerRadiusToBoundsHeightRatio: CGFloat = 0.06
         static let borderWidthToBoundsHeightRatio: CGFloat = 0.06
