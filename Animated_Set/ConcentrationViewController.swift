@@ -16,15 +16,15 @@ class ConcentrationViewController: UIViewController {
         return (cardButtons.count+1) / 2
     }
     
-    @IBOutlet private weak var flipCountLabel: UILabel! {
+    @IBOutlet weak var scoreLabe: CustomLabel! {
         didSet {
-            updateFlipCountLabel()
+            updateScoreLabel()
         }
     }
     
-    @IBOutlet weak var scoreLabel: UILabel! {
+    @IBOutlet weak var flipCountLabel: CustomLabel! {
         didSet {
-            updateScoreLabel()
+            updateFlipCountLabel()
         }
     }
     
@@ -64,21 +64,24 @@ class ConcentrationViewController: UIViewController {
     }
     
     private func updateFlipCountLabel() {
-        let attributes: [NSAttributedString.Key:Any] = [
-            .strokeWidth : 5.0,
-            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        ]
-        let attributedString = NSAttributedString(string: "Flips: \(game.flipCount)", attributes: attributes)
-        flipCountLabel.attributedText = attributedString
+//        let attributes: [NSAttributedString.Key:Any] = [
+//            .strokeWidth : 5.0,
+//            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        ]
+//        let attributedString = NSAttributedString(string: "Flips: \(game.flipCount)", attributes: attributes)
+//        flipCountLabel.attributedText = attributedString
+        flipCountLabel.updateText(string: "Flips: \(game.flipCount)")
     }
     
     private func updateScoreLabel() {
-        let attributes: [NSAttributedString.Key:Any] = [
-            .strokeWidth : 5.0,
-            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        ]
-        let attributedString = NSAttributedString(string: "Score: \(game.score)", attributes: attributes)
-        scoreLabel.attributedText = attributedString
+//        let attributes: [NSAttributedString.Key:Any] = [
+//            .strokeWidth : 5.0,
+//            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+//        ]
+//        let attributedString = NSAttributedString(string: "Score: \(game.score)", attributes: attributes)
+//        scoreLabel.attributedText = attributedString
+        scoreLabe.updateText(string: "Score: \(game.score)")
+//        scoreLabel.attributedText = NSAttributedString(string: "Score: \(game.score)")
     }
     
     var theme: String? {
