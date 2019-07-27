@@ -35,15 +35,15 @@ class SetViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var scoreLabel: CustomSetLabel! {
+    @IBOutlet weak var scoreLabel: CustomLabel! {
         didSet {
             updateScoreLabel()
         }
     }
     
-    @IBOutlet weak var dealButton: CustomSetButtom!
+    @IBOutlet weak var dealButton: CustomButtom!
     
-    @IBOutlet weak var newGameButton: CustomSetButtom!
+    @IBOutlet weak var newGameButton: CustomButtom!
     
 //    @IBOutlet private var newGameButton: UIButton! {
 //        didSet {
@@ -84,13 +84,13 @@ class SetViewController: UIViewController {
 //    }
 
     
-    @IBAction func dealCards(_ sender: CustomSetButtom) {
+    @IBAction func dealCards(_ sender: CustomButtom) {
         game.dealThreeCards()
         updateViewFromModel()
     }
     
     
-    @IBAction func startNewGame(_ sender: CustomSetButtom) {
+    @IBAction func startNewGame(_ sender: CustomButtom) {
         game = Set()
         updateViewFromModel()
     }
