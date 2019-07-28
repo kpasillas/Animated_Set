@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Concentration
-{
+class Concentration {
+    
     private(set) var cards = [ConcentrationCard]()
     
     private(set) var flipCount = 0
