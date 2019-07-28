@@ -41,9 +41,9 @@ class SetViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var dealButton: CustomButtom!
+    @IBOutlet weak var dealButton: CustomButton!
     
-    @IBOutlet weak var newGameButton: CustomButtom!
+    @IBOutlet weak var newGameButton: CustomButton!
     
 //    @IBOutlet private var newGameButton: UIButton! {
 //        didSet {
@@ -84,13 +84,13 @@ class SetViewController: UIViewController {
 //    }
 
     
-    @IBAction func dealCards(_ sender: CustomButtom) {
+    @IBAction func dealCards(_ sender: CustomButton) {
         game.dealThreeCards()
         updateViewFromModel()
     }
     
     
-    @IBAction func startNewGame(_ sender: CustomButtom) {
+    @IBAction func startNewGame(_ sender: CustomButton) {
         game = Set()
         updateViewFromModel()
     }
@@ -116,7 +116,7 @@ class SetViewController: UIViewController {
 //        print("In updateViewFromModel")
         
         layoutView.cardArray = convertCardToCardView(game.dealtCards)
-        updateDealLabel()
+        updateDealButton()
         updateScoreLabel()
     }
     
@@ -196,7 +196,7 @@ class SetViewController: UIViewController {
 //        }
 //    }
 
-    private func updateDealLabel() {
+    private func updateDealButton() {
         dealButton.isEnabled = !game.originalDeckOfCards.isEmpty
     }
 
