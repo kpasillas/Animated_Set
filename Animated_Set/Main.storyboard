@@ -117,7 +117,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aYQ-fZ-GPr">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="72"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HET-RY-oue">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HET-RY-oue" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -125,10 +125,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IPI-yS-pxU"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tgX-Vv-mzc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wu8-Rp-a3l">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wu8-Rp-a3l" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -136,10 +136,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="oPL-o0-U0e"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Me7-QK-vBg"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oId-Vu-NX0">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oId-Vu-NX0" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -147,10 +147,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="edT-U4-Ibh"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1QV-fd-OKp"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tH4-qS-EjW">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tH4-qS-EjW" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -158,7 +158,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="MHf-zk-wAm"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eRY-Xh-yWc"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -166,7 +166,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gQC-gg-yQP">
                                         <rect key="frame" x="0.0" y="80" width="343" height="72"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-Jf-p6O">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-Jf-p6O" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -174,10 +174,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CJC-2K-pIj"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cbj-zw-iCI"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thu-Ta-1r4">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="thu-Ta-1r4" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -185,10 +185,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8jP-8L-R76"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hQW-I6-Z60"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKa-fD-Kgv">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKa-fD-Kgv" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -196,10 +196,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="38E-Nm-piS"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hbj-Uu-sXH"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xfc-1b-P0J">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xfc-1b-P0J" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -207,7 +207,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PvT-bf-zHl"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="R8l-xW-CYc"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -215,7 +215,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="VBC-wz-X4F">
                                         <rect key="frame" x="0.0" y="160" width="343" height="72"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFB-0x-jE2">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fFB-0x-jE2" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -223,10 +223,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f9A-UT-m1V"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Czm-a4-NB0"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RH-fj-QsN">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RH-fj-QsN" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -234,10 +234,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="m4Z-nL-JJQ"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="2MH-o8-K5h"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wab-k8-BQ7">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wab-k8-BQ7" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -245,10 +245,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nqc-qh-DcV"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hvE-kD-b74"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wkz-Ty-AjN">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wkz-Ty-AjN" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -256,7 +256,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gCz-qF-gJd"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mBW-ay-zoI"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -264,7 +264,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Rl8-jD-rJi">
                                         <rect key="frame" x="0.0" y="240" width="343" height="72"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="059-ti-MN4">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="059-ti-MN4" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -272,10 +272,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Nce-2N-fyl"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k4g-Ma-DSc"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvv-Y8-FNY">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvv-Y8-FNY" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -283,10 +283,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7lX-5V-H8N"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T2p-7x-CyC"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CN-Eh-5iC">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7CN-Eh-5iC" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -294,10 +294,10 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S7d-YN-Nb2"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="svG-P1-Bam"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kg-hD-Cgi">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Kg-hD-Cgi" customClass="ConcentrationCardButton" customModule="Animated_Set" customModuleProvider="target">
                                                 <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="72"/>
                                                 <color key="backgroundColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="50"/>
@@ -305,7 +305,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="33"/>
                                                 </variation>
                                                 <connections>
-                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Eaj-tE-7sD"/>
+                                                    <action selector="touchCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uHv-NQ-89B"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -335,7 +335,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kl6-ay-onL" customClass="CustomButtom" customModule="Animated_Set" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kl6-ay-onL" customClass="CustomButton" customModule="Animated_Set" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="100" width="343" height="42"/>
                                         <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -374,24 +374,24 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="flipCountLabel" destination="luK-LF-Rbs" id="qfp-aD-VuL"/>
-                        <outlet property="scoreLabel" destination="c6S-uE-j8X" id="4qa-Dd-g8s"/>
-                        <outletCollection property="cardButtons" destination="HET-RY-oue" collectionClass="NSMutableArray" id="0EP-pM-owN"/>
-                        <outletCollection property="cardButtons" destination="wu8-Rp-a3l" collectionClass="NSMutableArray" id="EUh-s5-jxK"/>
-                        <outletCollection property="cardButtons" destination="oId-Vu-NX0" collectionClass="NSMutableArray" id="0dS-Gb-0D5"/>
-                        <outletCollection property="cardButtons" destination="tH4-qS-EjW" collectionClass="NSMutableArray" id="Cux-kq-lc0"/>
-                        <outletCollection property="cardButtons" destination="thu-Ta-1r4" collectionClass="NSMutableArray" id="LPp-fH-kp1"/>
-                        <outletCollection property="cardButtons" destination="qFG-Jf-p6O" collectionClass="NSMutableArray" id="FCn-AE-xGS"/>
-                        <outletCollection property="cardButtons" destination="eKa-fD-Kgv" collectionClass="NSMutableArray" id="Fgs-vm-uMa"/>
-                        <outletCollection property="cardButtons" destination="Xfc-1b-P0J" collectionClass="NSMutableArray" id="Eeo-GO-2Wf"/>
-                        <outletCollection property="cardButtons" destination="6RH-fj-QsN" collectionClass="NSMutableArray" id="Z8q-OQ-McA"/>
-                        <outletCollection property="cardButtons" destination="fFB-0x-jE2" collectionClass="NSMutableArray" id="Mmg-Qh-Csu"/>
-                        <outletCollection property="cardButtons" destination="Wab-k8-BQ7" collectionClass="NSMutableArray" id="OVH-rn-Esv"/>
-                        <outletCollection property="cardButtons" destination="Wkz-Ty-AjN" collectionClass="NSMutableArray" id="LY3-9o-2j3"/>
-                        <outletCollection property="cardButtons" destination="059-ti-MN4" collectionClass="NSMutableArray" id="phM-LJ-Gsi"/>
-                        <outletCollection property="cardButtons" destination="Zvv-Y8-FNY" collectionClass="NSMutableArray" id="sas-2J-zHa"/>
-                        <outletCollection property="cardButtons" destination="7CN-Eh-5iC" collectionClass="NSMutableArray" id="dCq-Es-9Vt"/>
-                        <outletCollection property="cardButtons" destination="5Kg-hD-Cgi" collectionClass="NSMutableArray" id="bMa-Y8-jqV"/>
+                        <outlet property="flipCountLabel" destination="luK-LF-Rbs" id="yCD-dV-Sgf"/>
+                        <outlet property="scoreLabel" destination="c6S-uE-j8X" id="Wcm-aa-9aZ"/>
+                        <outletCollection property="cardButtons" destination="HET-RY-oue" collectionClass="NSMutableArray" id="fAl-4w-RSW"/>
+                        <outletCollection property="cardButtons" destination="wu8-Rp-a3l" collectionClass="NSMutableArray" id="OY6-gR-n1P"/>
+                        <outletCollection property="cardButtons" destination="oId-Vu-NX0" collectionClass="NSMutableArray" id="Fl1-Ju-f0p"/>
+                        <outletCollection property="cardButtons" destination="tH4-qS-EjW" collectionClass="NSMutableArray" id="X72-pJ-W9z"/>
+                        <outletCollection property="cardButtons" destination="qFG-Jf-p6O" collectionClass="NSMutableArray" id="g6B-0K-7Km"/>
+                        <outletCollection property="cardButtons" destination="thu-Ta-1r4" collectionClass="NSMutableArray" id="JzZ-hc-Bas"/>
+                        <outletCollection property="cardButtons" destination="eKa-fD-Kgv" collectionClass="NSMutableArray" id="W2i-iN-eU9"/>
+                        <outletCollection property="cardButtons" destination="Xfc-1b-P0J" collectionClass="NSMutableArray" id="b5p-Jn-3QV"/>
+                        <outletCollection property="cardButtons" destination="fFB-0x-jE2" collectionClass="NSMutableArray" id="gPm-If-Jwa"/>
+                        <outletCollection property="cardButtons" destination="6RH-fj-QsN" collectionClass="NSMutableArray" id="imC-JM-UHX"/>
+                        <outletCollection property="cardButtons" destination="Wab-k8-BQ7" collectionClass="NSMutableArray" id="gov-6i-L7O"/>
+                        <outletCollection property="cardButtons" destination="Wkz-Ty-AjN" collectionClass="NSMutableArray" id="3Nc-c0-hDP"/>
+                        <outletCollection property="cardButtons" destination="059-ti-MN4" collectionClass="NSMutableArray" id="YaY-EX-6I2"/>
+                        <outletCollection property="cardButtons" destination="Zvv-Y8-FNY" collectionClass="NSMutableArray" id="pFL-lX-1Nh"/>
+                        <outletCollection property="cardButtons" destination="7CN-Eh-5iC" collectionClass="NSMutableArray" id="3jm-cT-ZDd"/>
+                        <outletCollection property="cardButtons" destination="5Kg-hD-Cgi" collectionClass="NSMutableArray" id="8kw-aU-ITk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -423,7 +423,7 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fk6-cr-UpF" customClass="CustomButtom" customModule="Animated_Set" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fk6-cr-UpF" customClass="CustomButton" customModule="Animated_Set" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="343" height="42"/>
                                         <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -437,7 +437,7 @@
                                             <action selector="dealCards:" destination="SgN-3n-zj1" eventType="touchUpInside" id="JI1-Tg-AyS"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-eq-u3n" customClass="CustomButtom" customModule="Animated_Set" customModuleProvider="target">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-eq-u3n" customClass="CustomButton" customModule="Animated_Set" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="100" width="343" height="42"/>
                                         <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>

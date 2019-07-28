@@ -16,7 +16,7 @@ class ConcentrationViewController: UIViewController {
         return (cardButtons.count+1) / 2
     }
     
-    @IBOutlet weak var scoreLabe: CustomLabel! {
+    @IBOutlet weak var scoreLabel: CustomLabel! {
         didSet {
             updateScoreLabel()
         }
@@ -31,12 +31,13 @@ class ConcentrationViewController: UIViewController {
     @IBAction func startNewGame(_ sender: UIButton) {
         game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
         emojiChoices = theme ?? ""
+        resetCardButtons()
         updateViewFromModel()
     }
     
-    @IBOutlet private var cardButtons: [UIButton]!
+    @IBOutlet var cardButtons: [ConcentrationCardButton]!
     
-    @IBAction private func touchCard(_ sender: UIButton) {
+    @IBAction func touchCard(_ sender: ConcentrationCardButton) {
         if let cardNumber = cardButtons.index(of: sender) {
             game.chooseCard(at: cardNumber)
             updateViewFromModel()
@@ -50,15 +51,19 @@ class ConcentrationViewController: UIViewController {
             for index in cardButtons.indices {
                 let button = cardButtons[index]
                 let card = game.cards[index]
+                button.symbol = emoji(for: card)
+                button.isFaceUp = card.isFaceUp
+                button.isMatched = card.isMatched
                 updateFlipCountLabel()
                 updateScoreLabel()
-                if card.isFaceUp {
-                    button.setTitle(emoji(for: card), for: UIControl.State.normal)
-                    button.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
-                } else {
-                    button.setTitle("", for: UIControl.State.normal)
-                    button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0) : #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
-                }
+//                if card.isFaceUp {
+//                    button.setTitle(emoji(for: card), for: UIControl.State.normal)
+//                    button.backgroundColor = UIColor.white
+//
+//                } else {
+//                    button.setTitle("", for: UIControl.State.normal)
+//                    button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0) : #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+//                }
             }
         }
     }
@@ -80,8 +85,16 @@ class ConcentrationViewController: UIViewController {
 //        ]
 //        let attributedString = NSAttributedString(string: "Score: \(game.score)", attributes: attributes)
 //        scoreLabel.attributedText = attributedString
-        scoreLabe.updateText(string: "Score: \(game.score)")
+        scoreLabel.updateText(string: "Score: \(game.score)")
 //        scoreLabel.attributedText = NSAttributedString(string: "Score: \(game.score)")
+    }
+    
+    private func resetCardButtons() {
+        for index in cardButtons.indices {
+            cardButtons[index].symbol = ""
+            cardButtons[index].isMatched = false
+            cardButtons[index].isFaceUp = false
+        }
     }
     
     var theme: String? {
