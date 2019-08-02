@@ -85,7 +85,7 @@ class ConcentrationCardButton: UIButton {
             } else {
                 self.setTitle("", for: .normal)
 //                self.setAttributedTitle(NSAttributedString(string: "", attributes: attributes), for: .normal)
-                self.backgroundColor = UIColor.darkGray
+                self.backgroundColor = UIColor.gray
             }
         }
         
