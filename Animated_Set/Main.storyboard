@@ -22,15 +22,15 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="mz9-i3-7oW">
                                 <rect key="frame" x="97.666666666666686" y="208.66666666666663" width="180" height="400"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nao-nH-4W9">
-                                        <rect key="frame" x="0.0" y="0.0" width="180" height="60"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cm6-BT-Wju">
+                                        <rect key="frame" x="21.333333333333329" y="0.0" width="137" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <state key="normal" title="Halloween"/>
+                                        <state key="normal" title="Animals"/>
                                         <connections>
-                                            <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="gMq-df-kkQ"/>
+                                            <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="4iN-Jg-fWt"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GP8-h4-G7B">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GP8-h4-G7B">
                                         <rect key="frame" x="49.999999999999986" y="68.000000000000028" width="80.000000000000014" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Cars"/>
@@ -38,36 +38,36 @@
                                             <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="MZG-4r-hVz"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cm6-BT-Wju">
-                                        <rect key="frame" x="21.333333333333329" y="136.00000000000003" width="137" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <state key="normal" title="Animals"/>
-                                        <connections>
-                                            <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="4iN-Jg-fWt"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oxx-aV-AQC">
-                                        <rect key="frame" x="39.333333333333329" y="204.00000000000003" width="100.99999999999999" height="59.999999999999972"/>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oxx-aV-AQC">
+                                        <rect key="frame" x="39.333333333333329" y="136.00000000000003" width="100.99999999999999" height="60"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Faces"/>
                                         <connections>
                                             <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="tBG-8r-aDi"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmS-gq-kTn">
-                                        <rect key="frame" x="33.333333333333329" y="272" width="112.99999999999999" height="60"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
-                                        <state key="normal" title="Sports"/>
-                                        <connections>
-                                            <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="6a3-V2-8Me"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHj-mW-HGf">
-                                        <rect key="frame" x="41.999999999999986" y="340" width="96.000000000000014" height="60"/>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yHj-mW-HGf">
+                                        <rect key="frame" x="41.999999999999986" y="204.00000000000003" width="96.000000000000014" height="59.999999999999972"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <state key="normal" title="Fruits"/>
                                         <connections>
                                             <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="4uf-0J-QKs"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nao-nH-4W9">
+                                        <rect key="frame" x="0.0" y="272" width="180" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="Halloween"/>
+                                        <connections>
+                                            <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="gMq-df-kkQ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dmS-gq-kTn">
+                                        <rect key="frame" x="33.333333333333329" y="340" width="112.99999999999999" height="60"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                        <state key="normal" title="Sports"/>
+                                        <connections>
+                                            <action selector="changeTheme:" destination="Cgf-d9-OiT" eventType="touchUpInside" id="6a3-V2-8Me"/>
                                         </connections>
                                     </button>
                                 </subviews>
