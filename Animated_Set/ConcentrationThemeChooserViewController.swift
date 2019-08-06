@@ -9,16 +9,14 @@
 import UIKit
 
 class ConcentrationThemeChooserViewController: UIViewController, UISplitViewControllerDelegate {
-
-    // TODO: Fix seque looking up by button title string (see lecture #7, 34:40)
     
     let themes = [
-        "Halloween":"🦇😱🙀😈🎃👻🍭🍬🍎🧛‍♂️",
-        "Cars":"🚗🚕🚌🏎🚓🚑🚒🚚🚙🚎",
-        "Animals":"🐶🐱🐭🐰🦊🐻🐼🦁🐮🐷",
-        "Faces":"😃🤣😊😇🙃😍😝🤓😎🤩",
-        "Sports":"⚽️🏀🏈⚾️🎾🏐🏉🎱🏓🏸",
-        "Fruits":"🍎🍊🍌🍉🍇🍓🍒🍍🥝🍐"
+        0:"🐶🐱🐭🐰🦊🐻🐼🦁🐮🐷",
+        1:"🚗🚕🚌🏎🚓🚑🚒🚚🚙🚎",
+        2:"😃🤣😊😇🙃😍😝🤓😎🤩",
+        3:"🍎🍊🍌🍉🍇🍓🍒🍍🥝🍐",
+        4:"🦇😱🙀😈🎃👻🍭🍬🍎🧛‍♂️",
+        5:"⚽️🏀🏈⚾️🎾🏐🏉🎱🏓🏸"
     ]
     
     override func awakeFromNib() {
@@ -36,15 +34,18 @@ class ConcentrationThemeChooserViewController: UIViewController, UISplitViewCont
     
     @IBAction func changeTheme(_ sender: Any) {
         if let cvc = splitViewDetailConcentrationViewController {
-            if let themeName = (sender as? UIButton)?.currentTitle, let theme = themes[themeName] {         // TODO: DRY
+//            print("splitViewDetailConcentrationViewController")
+            if let themeTag = (sender as? UIButton)?.tag, let theme = themes[themeTag] {
                 cvc.theme = theme
             }
         } else if let cvc = lastSeguedToConcentrationViewController {
-            if let themeName = (sender as? UIButton)?.currentTitle, let theme = themes[themeName] {         // TODO: DRY
+//            print("lastSeguedToConcentrationViewController")
+            if let themeTag = (sender as? UIButton)?.tag, let theme = themes[themeTag] {
                 cvc.theme = theme
             }
             navigationController?.pushViewController(cvc, animated: true)
         } else {
+//            print("performSegue")
             performSegue(withIdentifier: "Choose Theme", sender: sender)
         }
     }
@@ -59,7 +60,7 @@ class ConcentrationThemeChooserViewController: UIViewController, UISplitViewCont
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Choose Theme" {
-            if let themeName = (sender as? UIButton)?.currentTitle, let theme = themes[themeName] {
+            if let themeTag = (sender as? UIButton)?.tag, let theme = themes[themeTag] {
                 if let cvc = segue.destination as? ConcentrationViewController {
                     cvc.theme = theme
                     lastSeguedToConcentrationViewController = cvc
