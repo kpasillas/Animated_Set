@@ -35,7 +35,11 @@ class ConcentrationViewController: UIViewController {
         updateViewFromModel()
     }
     
-    @IBOutlet var cardButtons: [ConcentrationCardButton]!
+    @IBOutlet var cardButtons: [ConcentrationCardButton]! {
+        didSet {
+            resetCardButtons()
+        }
+    }
     
     @IBAction func touchCard(_ sender: ConcentrationCardButton) {
         if let cardNumber = cardButtons.index(of: sender) {
@@ -54,46 +58,35 @@ class ConcentrationViewController: UIViewController {
                 button.symbol = emoji(for: card)
                 button.isFaceUp = card.isFaceUp
                 button.isMatched = card.isMatched
+            }
+                
                 updateFlipCountLabel()
                 updateScoreLabel()
-//                if card.isFaceUp {
-//                    button.setTitle(emoji(for: card), for: UIControl.State.normal)
-//                    button.backgroundColor = UIColor.white
-//
-//                } else {
-//                    button.setTitle("", for: UIControl.State.normal)
-//                    button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0) : #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
-//                }
-            }
         }
     }
     
     private func updateFlipCountLabel() {
-//        let attributes: [NSAttributedString.Key:Any] = [
-//            .strokeWidth : 5.0,
-//            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        ]
-//        let attributedString = NSAttributedString(string: "Flips: \(game.flipCount)", attributes: attributes)
-//        flipCountLabel.attributedText = attributedString
         flipCountLabel.updateText(string: "Flips: \(game.flipCount)")
     }
     
     private func updateScoreLabel() {
-//        let attributes: [NSAttributedString.Key:Any] = [
-//            .strokeWidth : 5.0,
-//            .strokeColor : #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-//        ]
-//        let attributedString = NSAttributedString(string: "Score: \(game.score)", attributes: attributes)
-//        scoreLabel.attributedText = attributedString
         scoreLabel.updateText(string: "Score: \(game.score)")
-//        scoreLabel.attributedText = NSAttributedString(string: "Score: \(game.score)")
     }
     
     private func resetCardButtons() {
         for index in cardButtons.indices {
+            cardButtons[index].isUserInteractionEnabled = (theme != nil)
             cardButtons[index].symbol = ""
             cardButtons[index].isMatched = false
             cardButtons[index].isFaceUp = false
+        }
+    }
+    
+    private func updateAreCardsEnabled() {
+        if cardButtons != nil {
+            for index in cardButtons.indices {
+                cardButtons[index].isUserInteractionEnabled = (theme != nil)
+            }
         }
     }
     
@@ -101,6 +94,7 @@ class ConcentrationViewController: UIViewController {
         didSet {
             emojiChoices = theme ?? ""
             emoji = [:]
+            updateAreCardsEnabled()
             updateViewFromModel()
         }
     }
