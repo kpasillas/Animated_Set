@@ -10,67 +10,27 @@ import UIKit
 
 class SetCardsLayoutView: UIView {
     
-//    private lazy var cardArray = createCardArray()
-    var cardArray = [SetCardView]() { didSet { setNeedsDisplay(); setNeedsLayout() } }
+    private(set) lazy var cardGrid = Grid(layout: .aspectRatio(5/8), frame: CGRect.zero)
     
-    private lazy var cardGrid = Grid(layout: .aspectRatio(5/8), frame: CGRect.zero)
-    
-    private func configureCardArray(_ cards: [SetCardView]) {
-//        print("In configureCardArray")
-        
-        cardGrid.frame = self.bounds
-        cardGrid.cellCount = cards.count
-        
-        for index in cards.indices {
-            cards[index].frame = cardGrid[index]!.inset(by: cardGrid.CardInsetSize)
-//            cards[index].borderColorValue = UIColor.blue
-            addSubview(cards[index])
+    var cardCount = 0 {
+        didSet {
+//            print("In SetCardsLayoutView -> cardCount -> didSet")
+            cardGrid.cellCount = cardCount
+            setNeedsDisplay()
+            setNeedsLayout()
         }
-        
     }
     
     override func layoutSubviews() {
+//        print("In SetCardsLayoutView -> layoutSubviews")
         super.layoutSubviews()
-     
-//        print("In layoutSubviews")
-        removeAll()
 
-        configureCardArray(cardArray)
-        
-    }
-    
-    private func removeAll() {
-        
-        for view in subviews {
-            view.removeFromSuperview()
+        cardGrid.frame = self.bounds
+        for index in subviews.indices {
+            subviews[index].frame = cardGrid[index]!.inset(by: cardGrid.CardInsetSize)
         }
-        
-//        print("In CardsLayoutView -> removeAll")
-        
     }
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
-
-//extension CardsLayoutView {
-//    private struct SizeRatio {
-//        static let borderWidthToBoundsHeight: CGFloat = 0.005
-//        static let cornerRadiusToBoundsHeight: CGFloat = 0.06
-//    }
-//    private var borderWidth: CGFloat {
-//        return bounds.size.height * SizeRatio.borderWidthToBoundsHeight
-//    }
-//    private var cornerRadius: CGFloat {
-//        return bounds.size.height * SizeRatio.cornerRadiusToBoundsHeight
-//    }
-//}
 
 extension Grid {
     struct SizeRatio {

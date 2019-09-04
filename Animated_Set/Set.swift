@@ -12,6 +12,7 @@ import UIKit
 struct Set
 {
     private(set) var originalDeckOfCards: [SetCard] = {
+//        print ("In Set -> originalDeckOfCards")
         var CardsArray = [SetCard]()
         for shape in SetCard.Shape.allCases {
             for number in SetCard.Number.allCases {
@@ -22,10 +23,14 @@ struct Set
                 }
             }
         }
+//        for index in CardsArray.indices {
+//            print("\(index): \(CardsArray[index])")
+//        }
+        
         return CardsArray
     }()
     
-    private(set) var dealtCards = [SetCard?]()
+    private(set) var dealtCards = [SetCard]()
     private(set) var selectedCardsIndices = [Int]()
     private(set) var matchedCards = [SetCard]()
     private(set) var score = 0
@@ -37,75 +42,72 @@ struct Set
 //            } else {
 //                return false
 //            }
+            
             return testIfSet(testEnums)
         }
     }
     
     init() {
-        for _ in 1...12 {
-            dealtCards += [dealCard()]
-        }
-
-//        for _ in 0..<57 {
-//            _ = originalDeckOfCards.remove(at: originalDeckOfCards.count.arc4random)
+//        print("In Set -> init")
+        
+        originalDeckOfCards = shuffleDeck(originalDeckOfCards)
+        
+//        for _ in 15..<81 {
+//            _ = originalDeckOfCards.removeLast()
 //        }
     }
     
-    mutating func dealCard() -> SetCard? {
-        return (originalDeckOfCards.count > 0 ? originalDeckOfCards.remove(at: originalDeckOfCards.count.arc4random) : nil)
+    mutating func dealCard(at newIndex: Int) {
+        if !originalDeckOfCards.isEmpty {
+            dealtCards.insert(originalDeckOfCards.removeFirst(), at: newIndex)
+        }
     }
     
-    mutating func dealThreeCards() {
-        if isSet {
-            replaceSet()
+    mutating func removeSelectedCard(at oldIndex: Int) {
+        let oldCard = dealtCards.remove(at: oldIndex)
+        matchedCards.append(oldCard)
+    }
+    
+    mutating func deselectSet() {
+        score += 3
+        selectedCardsIndices.removeAll()
+    }
+    
+    mutating func deselectSetAndSelectCard(at selectedIndex: Int) {
+        score += 3
+        selectedCardsIndices.removeAll()
+        selectedCardsIndices.append(selectedIndex)
+    }
+    
+    mutating func deselectNonSetAndSelectCard(at selectedIndex: Int) {
+        score -= 5
+        if selectedCardsIndices.contains(selectedIndex) {
             selectedCardsIndices.removeAll()
         } else {
-            for _ in 1...3 {
-                dealtCards += [dealCard()]
-                //            dealtCards += [originalDeckOfCards.remove(at: index)]
-            }
+            selectedCardsIndices.removeAll()
+            selectedCardsIndices.append(selectedIndex)
         }
     }
     
-    mutating func selectCard(at index: Int) {
-        if selectedCardsIndices.count < 3 {
-            if let deselectIndex = selectedCardsIndices.firstIndex(of: index) {
-                selectedCardsIndices.remove(at: deselectIndex)
-            } else {
-                selectedCardsIndices += [index]
-            }
+    mutating func selectCard(at selectedIndex: Int) {
+        if let deselectIndex = selectedCardsIndices.firstIndex(of: selectedIndex) {
+            selectedCardsIndices.remove(at: deselectIndex)
         } else {
-            if isSet {
-                replaceSet()
-                score += 3
-            } else {
-                score -= 5
-            }
-            if selectedCardsIndices.contains(index) {
-                selectedCardsIndices.removeAll()
-            } else {
-                selectedCardsIndices.removeAll()
-                selectedCardsIndices += [index]
-            }
+            selectedCardsIndices.append(selectedIndex)
         }
     }
     
-    mutating func replaceSet() {
-        for index in selectedCardsIndices.indices {
-            matchedCards += [dealtCards.remove(at: selectedCardsIndices[index])!]
-            dealtCards.insert(dealCard(), at: selectedCardsIndices[index])
+    mutating func shuffleDeck(_ deck: [SetCard]) -> [SetCard] {
+        var shuffledDeck = deck
+        for index in shuffledDeck.indices {
+            let card = shuffledDeck.remove(at: index)
+            shuffledDeck.insert(card, at: shuffledDeck.count.arc4random)
         }
+        return shuffledDeck
     }
     
-    mutating func shuffleDealtCards() {
-        for index in dealtCards.indices {
-            let card = dealtCards.remove(at: index)
-            dealtCards.insert(card, at: dealtCards.count)
-        }
-    }
-    
-    func testIfSet(_ aClosure: (SetCard, SetCard, SetCard) -> Bool) -> Bool {
-        return (selectedCardsIndices.count == 3 && aClosure(dealtCards[selectedCardsIndices[0]]!, dealtCards[selectedCardsIndices[1]]!, dealtCards[selectedCardsIndices[2]]!))
+    private func testIfSet(_ aClosure: (SetCard, SetCard, SetCard) -> Bool) -> Bool {
+        return (selectedCardsIndices.count == 3 && aClosure(dealtCards[selectedCardsIndices[0]], dealtCards[selectedCardsIndices[1]], dealtCards[selectedCardsIndices[2]]))
     }
     
     var testEnums: (SetCard, SetCard, SetCard) -> Bool = {
@@ -113,15 +115,3 @@ struct Set
     }
     
 }
-
-//extension Int {
-//    var arc4random: Int {
-//        if self > 0 {
-//            return Int(arc4random_uniform(UInt32(self)))
-//        } else if self < 0 {
-//            return -Int(arc4random_uniform(UInt32(abs(self))))
-//        } else {
-//            return 0
-//        }
-//    }
-//}
