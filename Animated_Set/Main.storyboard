@@ -434,7 +434,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
-                                            <action selector="dealCards:" destination="SgN-3n-zj1" eventType="touchUpInside" id="JI1-Tg-AyS"/>
+                                            <action selector="dealThreeCards:" destination="SgN-3n-zj1" eventType="touchUpInside" id="JI1-Tg-AyS"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fsz-eq-u3n" customClass="CustomButton" customModule="Animated_Set" customModuleProvider="target">
