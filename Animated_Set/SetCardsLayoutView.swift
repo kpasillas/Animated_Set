@@ -21,15 +21,20 @@ class SetCardsLayoutView: UIView {
         }
     }
     
-    override func layoutSubviews() {
-//        print("In SetCardsLayoutView -> layoutSubviews")
-        super.layoutSubviews()
-
-        cardGrid.frame = self.bounds
-        for index in subviews.indices {
-            subviews[index].frame = cardGrid[index]!.inset(by: cardGrid.CardInsetSize)
+    var gridFrame = CGRect.zero {
+        didSet {
+//            print("In SetCardsLayoutView -> gridFrame -> didSet")
+            cardGrid.frame = gridFrame
+            setNeedsDisplay()
+            setNeedsLayout()
         }
     }
+    
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+////        print("In SetCardsLayoutView -> layoutSubviews")
+//
+//    }
 }
 
 extension Grid {

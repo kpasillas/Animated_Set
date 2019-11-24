@@ -22,171 +22,463 @@ class SetViewController: UIViewController {
     @IBOutlet weak var layoutView: SetCardsLayoutView! {
         didSet {
 //            print("In SetViewController -> layoutView -> didSet")
-            layoutView.backgroundColor = UIColor.clear
+            layoutView.backgroundColor = UIColor.clear                                  // layoutView set to blue for lay-out debugging, set to clear when run
         }
     }
     
     override func viewDidLoad() {
-//        print("In SetViewController -> viewDidLoad")
         super.viewDidLoad()
-        
-        for _ in 1...12 {
-            placeDealtCard(at: nil)
-        }
-        
-        updateViewFromModel()
+//        print("In SetViewController -> viewDidLoad")
+        dealTwelveCardsToStartGame()
     }
     
-    @IBAction func dealThreeCards(_ sender: CustomButton) {
-//        print("In SetViewController -> dealThreeCards")
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+//        print("In SetViewController -> viewDidLayoutSubviews (Start)")
         
-        if game.isSet {                                             // if cards are a set, replace 3 selected cards
+    if layoutView.cardCount > 0 {                                                       // re-layout cards when device orientation changes
+            layoutView.gridFrame = layoutView.bounds
+            for index in layoutView.subviews.indices {
+                layoutView.subviews[index].frame = layoutView.cardGrid[index]!.inset(by: layoutView.cardGrid.CardInsetSize)
+            }
+        }
+        
+//        print("In SetViewController -> viewDidLayoutSubviews (End)")
+    }
+    
+    @IBAction func dealButtonAction(_ sender: CustomButton) {
+//        print("In SetViewController -> dealButtonAction (Start)")
+        
+        if game.isSet {                                                                 // if cards are a set, remove and replace 3 selected cards
             let sortedCardIndices = game.selectedCardsIndices.sorted(by: { $0 > $1 })
-            for index in sortedCardIndices.indices {
-                let indexToRemoveAndReplace = sortedCardIndices[index]
-                removeMatchedCard(at: indexToRemoveAndReplace)
-                placeDealtCard(at: indexToRemoveAndReplace)
-            }
-            game.deselectSet()
-        } else {                                                    // if cards are not a set, deal 3 more cards
-            for _ in 1...3 {
-                placeDealtCard(at: nil)
-            }
+            removeAndReplaceMatchedCards(at: sortedCardIndices)
+        } else {                                                                        // if cards are not a set, deal 3 more cards at end of deck
+            dealMoreCards()
         }
-
-        updateViewFromModel()
+        
+//        print("In SetViewController -> dealButtonAction (End)")
     }
     
-    
-    @IBAction func startNewGame(_ sender: CustomButton) {
-//        print ("In SetViewController -> startNewGame")
+    @IBAction func newGameAction(_ sender: CustomButton) {
+//        print ("In SetViewController -> newGameAction (Start)")
         
-        game = Set()
-        
-        for _ in 0..<layoutView.subviews.count {
+        for _ in 0..<layoutView.subviews.count {                                        // remove old card views
             if let viewToRemove = layoutView.subviews.last as? SetCardView {
                 viewToRemove.removeFromSuperview()
             }
         }
-        layoutView.cardCount = 0
         
-        for _ in 1...12 {
-            placeDealtCard(at: nil)
-        }
-
-        updateViewFromModel()
+        game = Set()                                                                    // reset game
+        dealTwelveCardsToStartGame()
+        
+//        print ("In SetViewController -> newGameAction (End)")
     }
     
-    private func placeDealtCard(at index: Int?) {
-//        print ("In SetViewController -> placeDealtCard")
+    private func dealTwelveCardsToStartGame() {
         
-        if !game.originalDeckOfCards.isEmpty {
-            let newIndex = index ?? game.dealtCards.count           // insert at index if replacing a card, otherwise add to end of dealt cards
-            game.dealCard(at: newIndex)
-            let newCardView = convertCardToCardView(game.dealtCards[newIndex])
-            layoutView.cardCount = game.dealtCards.count
-            newCardView.frame = layoutView.cardGrid[newIndex]!.inset(by: layoutView.cardGrid.CardInsetSize)
-            layoutView.insertSubview(newCardView, at: newIndex)
+        var newCardDeck = [SetCardView]()
+        var indexToInsert = 0
+        
+        layoutView.gridFrame = layoutView.bounds
+        layoutView.cardCount = game.dealtCards.count
+        
+        for index in game.dealtCards.indices {                                          // new cards start with alpha = 0, frame = top-left
+            newCardDeck += [convertCardToCardView(game.dealtCards[index])]
+            newCardDeck[index].frame = CGRect.zero
+            newCardDeck[index].alpha = 0.0
         }
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],             // 1
+           animations: {
+            self.updateScoreLabel()                                                     // reset game score
+            self.dealButton.isEnabled = false                                           // dealButton disabled while dealing cards
+            self.layoutView.addSubview(newCardDeck[indexToInsert])
+                newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                newCardDeck[indexToInsert].alpha = 1.0
+            }, completion: { finished in
+                indexToInsert += 1
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        // 2
+                   animations: {
+                        self.layoutView.addSubview(newCardDeck[indexToInsert])
+                        newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                        newCardDeck[indexToInsert].alpha = 1.0
+                    }, completion: { finished in
+                        indexToInsert += 1
+                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        // 3
+                           animations: {
+                                self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                newCardDeck[indexToInsert].alpha = 1.0
+                            }, completion: { finished in
+                                indexToInsert += 1
+                                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        // 4
+                                   animations: {
+                                        self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                        newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                        newCardDeck[indexToInsert].alpha = 1.0
+                                    }, completion: { finished in
+                                        indexToInsert += 1
+                                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options:[.curveEaseOut],     // 5
+                                           animations: {
+                                                self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                                newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                newCardDeck[indexToInsert].alpha = 1.0
+                                            }, completion: { finished in
+                                                indexToInsert += 1
+                                                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        //6
+                                                   animations: {
+                                                        self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                                        newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                        newCardDeck[indexToInsert].alpha = 1.0
+                                                    }, completion: { finished in
+                                                        indexToInsert += 1
+                                                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        // 7
+                                                           animations: {
+                                                                self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                                                newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                                newCardDeck[indexToInsert].alpha = 1.0
+                                                            }, completion: { finished in
+                                                                indexToInsert += 1
+                                                                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        // 8
+                                                                   animations: {
+                                                                        self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                                                        newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                                        newCardDeck[indexToInsert].alpha = 1.0
+                                                                    }, completion: { finsihed in
+                                                                        indexToInsert += 1
+                                                                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        //9
+                                                                           animations: {
+                                                                                self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                                                                newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                                                newCardDeck[indexToInsert].alpha = 1.0
+                                                                            }, completion: { finished in
+                                                                                indexToInsert += 1
+                                                                                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        // 10
+                                                                                   animations: {
+                                                                                        self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                                                                        newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                                                        newCardDeck[indexToInsert].alpha = 1.0
+                                                                                    }, completion: { finished in
+                                                                                        indexToInsert += 1
+                                                                                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        // 11
+                                                                                           animations: {
+                                                                                                self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                                                                                newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                                                                newCardDeck[indexToInsert].alpha = 1.0
+                                                                                            }, completion: { finished in
+                                                                                                indexToInsert += 1
+                                                                                                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealTwelveCardsToStartGameDuration, delay: self.layoutView.dealTwelveCardsToStartGameDelay, options: [.curveEaseOut],        // 12
+                                                                                                   animations: {
+                                                                                                        self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                                                                                        newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[indexToInsert]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                                                                        newCardDeck[indexToInsert].alpha = 1.0
+                                                                                                    }, completion: { finished in
+                                                                                                        self.dealButton.isEnabled = true
+                                                                                                    }
+                                                                                                )
+                                                                                            }
+                                                                                        )
+                                                                                    }
+                                                                                )
+                                                                            }
+                                                                        )
+                                                                    }
+                                                                )
+                                                            }
+                                                        )
+                                                    }
+                                                )
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+            }
+        )
+        
     }
     
-    private func removeMatchedCard(at indexToRemove: Int) {
-        if let viewToRemove = layoutView.subviews[indexToRemove] as? SetCardView {
-            viewToRemove.removeFromSuperview()
-            game.removeSelectedCard(at: indexToRemove)
-            layoutView.cardCount = game.dealtCards.count
-        }
+    private func relayoutCards() {
+        layoutView.cardCount = game.dealtCards.count
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.relayoutCardsDuration, delay: self.layoutView.relayoutCardsDelay, options: [.curveEaseOut],
+            animations: {
+                for index in self.layoutView.subviews.indices {
+                    self.layoutView.subviews[index].frame = self.layoutView.cardGrid[index]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                }
+            }
+        )
     }
     
     private func updateViewFromModel() {
-//        print("In SetViewController -> updateViewFromModel")
+//        print("In SetViewController -> updateViewFromModel (Start)")
         
-        for index in layoutView.subviews.indices {
-//            UIViewPropertyAnimator.runningPropertyAnimator(withDuration: 1.0, delay: 0.5, options: [.curveEaseInOut], animations:{ self.layoutView.subviews[index].frame = self.layoutView.cardGrid[index]!.inset(by: self.layoutView.cardGrid.CardInsetSize) })
+        for index in layoutView.subviews.indices {                                      // set card border color
             if let cardView = layoutView.subviews[index] as? SetCardView {
-                cardView.frame = layoutView.cardGrid[index]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
                 cardView.borderColorValue = getBorderColor(index)
             }
         }
         
         updateDealButton()
         updateScoreLabel()
+        
+//        print("In SetViewController -> updateViewFromModel (End)")
+    }
+
+    private func dealMoreCards() {
+//        print("In SetViewController -> addCardsToEndOfDeck (Start)")
+        
+        var newCardDeck = [SetCardView]()
+        var indexToInsert = 0
+        
+        game.dealThreeCards()
+        layoutView.cardCount = game.dealtCards.count
+        
+        for index in (game.dealtCards.index(game.dealtCards.endIndex, offsetBy: -3))...(game.dealtCards.index(game.dealtCards.endIndex, offsetBy: -1)) {
+            newCardDeck += [convertCardToCardView(game.dealtCards[index])]
+            newCardDeck[indexToInsert].frame = CGRect.zero
+            newCardDeck[indexToInsert].alpha = 0.0
+            indexToInsert += 1
+        }
+        indexToInsert = 0
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.relayoutCardsDuration, delay: self.layoutView.relayoutCardsDelay, options: [.curveEaseOut],
+           animations: {
+                for index in self.layoutView.subviews.indices {                         // re-layout cards
+                    self.layoutView.subviews[index].frame = self.layoutView.cardGrid[index]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                }
+            }, completion: { finished in
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseOut],
+                   animations: {
+                        self.layoutView.addSubview(newCardDeck[indexToInsert])
+                        newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[(self.game.dealtCards.index(self.game.dealtCards.endIndex, offsetBy: -3))]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                        newCardDeck[indexToInsert].alpha = 1.0
+                    }, completion: { finished in
+                        indexToInsert += 1
+                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseOut],
+                           animations: {
+                                self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[(self.game.dealtCards.index(self.game.dealtCards.endIndex, offsetBy: -2))]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                newCardDeck[indexToInsert].alpha = 1.0
+                            }, completion: { finished in
+                                indexToInsert += 1
+                                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseOut],
+                                   animations: {
+                                        self.layoutView.addSubview(newCardDeck[indexToInsert])
+                                        newCardDeck[indexToInsert].frame = self.layoutView.cardGrid[(self.game.dealtCards.index(self.game.dealtCards.endIndex, offsetBy: -1))]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                        newCardDeck[indexToInsert].alpha = 1.0
+                                    }, completion: { finished in
+                                        self.updateViewFromModel()
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+            }
+        )
+        
+//        print("In SetViewController -> addCardsToEndOfDeck (End)")
     }
     
-    private func convertCardToCardView(_ card: SetCard) -> UIView {
+    private func removeAndReplaceMatchedCards(at indicesToRemoveAndReplace: [Int]) {
+//        print("In SetViewController -> removeAndReplaceMatchedCards (Start)")
+        
+        var newCardDeck = [SetCardView]()
+        var indexToRemoveAndReplace = 0
+        
+        game.replaceAndDeselectSet()
+        
+        for index in indicesToRemoveAndReplace.indices {
+            newCardDeck.append(convertCardToCardView(game.dealtCards[indicesToRemoveAndReplace[index]]))
+            newCardDeck[indexToRemoveAndReplace].frame = CGRect.zero
+            newCardDeck[indexToRemoveAndReplace].alpha = 0.0
+            indexToRemoveAndReplace += 1
+        }
+        indexToRemoveAndReplace = 0
+     
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseIn],
+            animations: {
+                if let viewToRemove = self.layoutView.subviews[indicesToRemoveAndReplace[indexToRemoveAndReplace]] as? SetCardView {
+                    viewToRemove.frame = CGRect(x: viewToRemove.superview!.bounds.maxX, y: viewToRemove.superview!.bounds.maxY, width: viewToRemove.bounds.width, height: viewToRemove.bounds.height)
+                    viewToRemove.transform = CGAffineTransform.identity.scaledBy(x: self.layoutView.discardCardsScale, y: self.layoutView.discardCardsScale)
+                    viewToRemove.alpha = 0.0
+                }
+            }, completion: { finished in
+                indexToRemoveAndReplace += 1
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseIn],
+                   animations: {
+                        if let viewToRemove = self.layoutView.subviews[indicesToRemoveAndReplace[indexToRemoveAndReplace]] as? SetCardView {
+                            viewToRemove.frame = CGRect(x: viewToRemove.superview!.bounds.maxX, y: viewToRemove.superview!.bounds.maxY, width: viewToRemove.bounds.width, height: viewToRemove.bounds.height)
+                            viewToRemove.transform = CGAffineTransform.identity.scaledBy(x: self.layoutView.discardCardsScale, y: self.layoutView.discardCardsScale)
+                            viewToRemove.alpha = 0.0
+                        }
+                    }, completion: { finished in
+                        indexToRemoveAndReplace += 1
+                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseIn],
+                            animations: {
+                                if let viewToRemove = self.layoutView.subviews[indicesToRemoveAndReplace[indexToRemoveAndReplace]] as? SetCardView {
+                                    viewToRemove.frame = CGRect(x: viewToRemove.superview!.bounds.maxX, y: viewToRemove.superview!.bounds.maxY, width: viewToRemove.bounds.width, height: viewToRemove.bounds.height)
+                                    viewToRemove.transform = CGAffineTransform.identity.scaledBy(x: self.layoutView.discardCardsScale, y: self.layoutView.discardCardsScale)
+                                    viewToRemove.alpha = 0.0
+                                }
+                            }, completion: { finished in
+                                for index in indicesToRemoveAndReplace.indices {        // remove discarded card cardViews
+                                    if let viewToRemove = self.layoutView.subviews[indicesToRemoveAndReplace[index]] as? SetCardView {
+                                        viewToRemove.removeFromSuperview()
+                                    }
+                                }
+                                
+                                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseOut],
+                                    animations: {
+                                        let viewToAdd = newCardDeck.removeLast()
+                                        self.layoutView.insertSubview(viewToAdd, at: indicesToRemoveAndReplace[indexToRemoveAndReplace])
+                                        viewToAdd.frame = self.layoutView.cardGrid[indicesToRemoveAndReplace[indexToRemoveAndReplace]]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                        viewToAdd.alpha = 1.0
+                                    }, completion: { finished in
+                                        indexToRemoveAndReplace -= 1
+                                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseOut],
+                                           animations: {
+                                                let viewToAdd = newCardDeck.removeLast()
+                                                self.layoutView.insertSubview(viewToAdd, at: indicesToRemoveAndReplace[indexToRemoveAndReplace])
+                                                viewToAdd.frame = self.layoutView.cardGrid[indicesToRemoveAndReplace[indexToRemoveAndReplace]]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                viewToAdd.alpha = 1.0
+                                            }, completion: { finished in
+                                                indexToRemoveAndReplace -= 1
+                                                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseOut],
+                                                   animations: {
+                                                        let viewToAdd = newCardDeck.removeLast()
+                                                        self.layoutView.insertSubview(viewToAdd, at: indicesToRemoveAndReplace[indexToRemoveAndReplace])
+                                                        viewToAdd.frame = self.layoutView.cardGrid[indicesToRemoveAndReplace[indexToRemoveAndReplace]]!.inset(by: self.layoutView.cardGrid.CardInsetSize)
+                                                        viewToAdd.alpha = 1.0
+                                                    }, completion: { finished in
+                                                        self.updateViewFromModel()
+                                                    }
+                                                )
+                                            }
+                                        )
+                                    }
+                                )
+                            }
+                        )
+                    }
+                )
+            }
+        )
+
+//        print("In SetViewController -> removeAndReplaceMatchedCards (End)")
+    }
+    
+    private func removeMatchedCards(at indicesToRemove: [Int]) {
+//        print("In SetViewController -> removeMatchedCards (Start)")
+        
+        game.discardAndDeselectSet()
+        
+        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseIn],
+           animations: {
+                if let viewToRemove = self.layoutView.subviews[indicesToRemove[0]] as? SetCardView {
+                    viewToRemove.frame = CGRect(x: viewToRemove.superview!.bounds.maxX, y: viewToRemove.superview!.bounds.maxY, width: viewToRemove.bounds.width, height: viewToRemove.bounds.height)
+                    viewToRemove.transform = CGAffineTransform.identity.scaledBy(x: self.layoutView.discardCardsScale, y: self.layoutView.discardCardsScale)
+                    viewToRemove.alpha = 0.0
+                }
+            }, completion: { finished in
+                UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseIn],
+                   animations: {
+                        if let viewToRemove = self.layoutView.subviews[indicesToRemove[1]] as? SetCardView {
+                            viewToRemove.frame = CGRect(x: viewToRemove.superview!.bounds.maxX, y: viewToRemove.superview!.bounds.maxY, width: viewToRemove.bounds.width, height: viewToRemove.bounds.height)
+                            viewToRemove.transform = CGAffineTransform.identity.scaledBy(x: self.layoutView.discardCardsScale, y: self.layoutView.discardCardsScale)
+                            viewToRemove.alpha = 0.0
+                        }
+                    }, completion: { finished in
+                        UIViewPropertyAnimator.runningPropertyAnimator(withDuration: self.layoutView.dealThreeCardsDuration, delay: self.layoutView.dealThreeCardsDelay, options: [.curveEaseIn],
+                           animations: {
+                                if let viewToRemove = self.layoutView.subviews[indicesToRemove[2]] as? SetCardView {
+                                    viewToRemove.frame = CGRect(x: viewToRemove.superview!.bounds.maxX, y: viewToRemove.superview!.bounds.maxY, width: viewToRemove.bounds.width, height: viewToRemove.bounds.height)
+                                    viewToRemove.transform = CGAffineTransform.identity.scaledBy(x: self.layoutView.discardCardsScale, y: self.layoutView.discardCardsScale)
+                                    viewToRemove.alpha = 0.0
+                                }
+                            }, completion: { finished in
+                                for index in indicesToRemove.indices {
+                                    if let viewToRemove = self.layoutView.subviews[indicesToRemove[index]] as? SetCardView {
+                                        viewToRemove.removeFromSuperview()
+                                    }
+                                }
+                                self.relayoutCards()
+                                self.updateViewFromModel()
+                            }
+                        )
+                    }
+                )
+            }
+        )
+        
+//        print("In SetViewController -> removeMatchedCards (End)")
+    }
+    
+    private func convertCardToCardView(_ card: SetCard) -> SetCardView {
 //        print("In SetViewController -> convertCardToCardView")
         
-            // initialize new CardView
-            let borderColor = UIColor.darkGray
-            let newCardView = SetCardView(shapeSymbol: card.shape.description, shapeNumber: card.number.rawValue, shapeColor: card.colorValue, shapeShading: card.shading.description, borderColorValue: borderColor)
+        // initialize new CardView
+        let borderColor = UIColor.darkGray
+        let newCardView = SetCardView(shapeSymbol: card.shape.description, shapeNumber: card.number.rawValue, shapeColor: card.colorValue, shapeShading: card.shading.description, borderColorValue: borderColor)
         
-            // add Tap function
-            let tap = UITapGestureRecognizer(target: self, action: #selector(tapCardAction(_:)))
-            tap.numberOfTapsRequired = 1
-            newCardView.isUserInteractionEnabled = true
-            newCardView.addGestureRecognizer(tap)
-            return newCardView
+        // add Tap function
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tapCardAction(_:)))
+        tap.numberOfTapsRequired = 1
+        newCardView.isUserInteractionEnabled = true
+        newCardView.addGestureRecognizer(tap)
+        
+        return newCardView
     }
 
     @objc func tapCardAction(_ recognizer: UITapGestureRecognizer) {
         switch recognizer.state {
-        case .ended:
-            if var selectedCardIndex = layoutView.subviews.firstIndex(of: recognizer.view!) {
-//                print("In SetViewController -> tapCardAction -> Tapped Card = \(selectedCardIndex) : \(game.dealtCards[selectedCardIndex])"
-                if game.isSet {                                                             // if selected cards are a set
-                    let sortedCardIndices = game.selectedCardsIndices.sorted(by: { $0 > $1 })
-                    if game.originalDeckOfCards.isEmpty {                                       // if no more cards to deal
-                        if game.selectedCardsIndices.contains(selectedCardIndex) {                  // if selected card is already selected, deselect all
-                            for index in sortedCardIndices.indices {
-                                let indexToRemove = sortedCardIndices[index]
-                                if indexToRemove < selectedCardIndex {
-                                    selectedCardIndex -= 1
+            case .ended:
+                if var selectedCardIndex = layoutView.subviews.firstIndex(of: recognizer.view!) {
+                    if game.isSet {                                                     // if selected cards are a set
+                        let sortedSelectedCardIndices = game.selectedCardsIndices.sorted(by: { $0 > $1 })
+                        if game.deckIsEmpty {                                               // if no more cards to deal
+                            if sortedSelectedCardIndices.contains(selectedCardIndex) {          // if selected card is not already selected, deselect all then select new card
+                                removeMatchedCards(at: sortedSelectedCardIndices)
+                            } else {
+                                for index in sortedSelectedCardIndices.indices {                    // adjust selectedCardIndex if < selectedCardIndices
+                                    let indexToRemove = sortedSelectedCardIndices[index]
+                                    if indexToRemove < selectedCardIndex {
+                                        selectedCardIndex -= 1
+                                    }
                                 }
-                                removeMatchedCard(at: indexToRemove)
+                                removeMatchedCards(at: sortedSelectedCardIndices)
+                                game.selectCard(at: selectedCardIndex)
                             }
-                            game.deselectSet()
-                        } else {                                                                    // if selected card is not already selected, deselect all then select new card
-                            for index in sortedCardIndices.indices {
-                                let indexToRemove = sortedCardIndices[index]
-                                if indexToRemove < selectedCardIndex {
-                                    selectedCardIndex -= 1
-                                }
-                                removeMatchedCard(at: indexToRemove)
+                        } else {                                                            // if there are more cards to deal
+                            removeAndReplaceMatchedCards(at: sortedSelectedCardIndices)         // if selected card is already selected, deselect all
+                            if !sortedSelectedCardIndices.contains(selectedCardIndex) {         // if selected card is not already selected, deselect all then select new card
+                                game.selectCard(at: selectedCardIndex)
                             }
-                            game.deselectSetAndSelectCard(at: selectedCardIndex)
                         }
-                    } else {                                                                    // if there are more cards to deal
-                        for index in sortedCardIndices.indices {
-                            let indexToRemoveAndReplace = sortedCardIndices[index]
-                            removeMatchedCard(at: indexToRemoveAndReplace)
-                            placeDealtCard(at: indexToRemoveAndReplace)
-                        }
-                        if game.selectedCardsIndices.contains(selectedCardIndex) {                  // if selected card is already selected, deselect all
-                            game.deselectSet()
-                        } else {                                                                    // if selected card is not already selected, deselect all then select new card
-                            game.deselectSetAndSelectCard(at: selectedCardIndex)
-                        }
+                    } else if game.selectedCardsIndices.count == 3 {                    // if there are three selected cards which are not a set, deselect three cards
+                        game.deselectNonSetAndSelectCard(at: selectedCardIndex)
+                        updateViewFromModel()
+                    } else {                                                            // if fewer than three cards are selected, add new selected card
+                        game.selectCard(at: selectedCardIndex)
+                        updateViewFromModel()
                     }
-                } else if game.selectedCardsIndices.count == 3 {                            // if there are three selected cards which are not a set, deselect three cards
-                    game.deselectNonSetAndSelectCard(at: selectedCardIndex)
-                } else {                                                                    // if less than three cards are selected, add new selected card
-                    game.selectCard(at: selectedCardIndex)
                 }
-                updateViewFromModel()
-            }
-        default:
-            break
+            default:
+                break
         }
     }
     
     private func getBorderColor(_ index: Int) -> UIColor {
         var color = UIColor()
         
-        if game.selectedCardsIndices.contains(index) {
-            if game.selectedCardsIndices.count == 3 {
-                if game.isSet {
+        if game.selectedCardsIndices.contains(index) {                                  // card is selected
+            if game.selectedCardsIndices.count == 3 {                                       // card is potentially part of a set
+                if game.isSet {                                                                 // card is part of a set
                     color = #colorLiteral(red: 0.721568644, green: 0.8862745166, blue: 0.5921568871, alpha: 1)
-                } else {
+                } else {                                                                        // card is not part of a set
                     color = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
                 }
             } else {
@@ -200,7 +492,7 @@ class SetViewController: UIViewController {
     }
 
     private func updateDealButton() {
-        dealButton.isEnabled = !game.originalDeckOfCards.isEmpty
+        dealButton.isEnabled = !game.deckIsEmpty
     }
 
     private func updateScoreLabel() {
@@ -212,9 +504,39 @@ class SetViewController: UIViewController {
 extension SetCard {
     var colorValue: UIColor {
         switch self.color {
-        case .red: return UIColor.red
-        case .green: return UIColor.green
-        case .purple: return UIColor.purple
+            case .red: return UIColor.red
+            case .green: return UIColor.green
+            case .purple: return UIColor.purple
         }
+    }
+}
+
+extension SetCardsLayoutView {
+    var dealTwelveCardsToStartGameDuration: Double {
+        return 0.15
+    }
+    
+    var dealTwelveCardsToStartGameDelay: Double {
+        return 0.07
+    }
+    
+    var relayoutCardsDuration: Double {
+        return 0.25
+    }
+    
+    var relayoutCardsDelay: Double {
+        return 0.1
+    }
+    
+    var dealThreeCardsDuration: Double {
+        return 0.25
+    }
+    
+    var dealThreeCardsDelay: Double {
+        return 0.1
+    }
+    
+    var discardCardsScale: CGFloat {
+        return 0.01
     }
 }
